@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/api/api_services.dart';
 
@@ -22,10 +23,22 @@ class AuthModel with ChangeNotifier {
     print("---$userName");
     if (userName.isNotEmpty && userPass.isNotEmpty) {
       print('Let veryfy $userPassword');
-      var result = await ApiService().requestAuth(userName , userPass);
-      print(result);
+      var result = await ApiService().requestAuth(userName, userPass);
+      if (result != null &&
+          result['success'] == true &&
+          result['data']['token'] != '') {
+        var token = result['data']['token'];
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', token);
+        print("---$token");
+        return true;
+      } else {
+        print("hi i am rr --- $result");
+        return false;
+      }
     } else {
       print('Not ok');
+      return false;
     }
   }
 }

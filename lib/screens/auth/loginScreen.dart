@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../commonWidget/slide_page_route.dart';
+import '../../constant/constant_data.dart';
 import '../../model/authModel.dart';
 import '../home/homeScreen.dart';
 
@@ -20,9 +22,29 @@ class _LoginPageState extends State<LoginPage> {
   late AuthModel _authModel;
   String userName = '';
   String password = '';
+
+  checkisLogin() async {
+    print('hi i am in');
+    var token =
+        await SharedPreferencesData().getData(SharedPreferencesData().tokenKey);
+    print('=====----===$token');
+    if (token != null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          SlidePageRoute(
+            page: HomeScreen(),
+            tween: Tween(
+              begin: const Offset(1, 0),
+              end: Offset.zero,
+            ),
+          ),
+          (route) => false);
+    }
+  }
+
   void initState() {
     super.initState();
     _authModel = Provider.of<AuthModel>(context, listen: false);
+    checkisLogin();
   }
 
   @override
@@ -133,7 +155,6 @@ class _LoginPageState extends State<LoginPage> {
                                       textInputAction: TextInputAction.done,
                                       onChanged: (value) {
                                         userName = value;
-                                       
                                       },
                                       decoration: InputDecoration(
                                         counterText: "",
@@ -269,17 +290,39 @@ class _LoginPageState extends State<LoginPage> {
                             height: _screenSize.height * .1,
                           ),
                           GestureDetector(
-                            onTap: () {
-                              userModelData.verificationUser(userName: userName , userPass: password);
-                              Navigator.of(context).push(
-                                SlidePageRoute(
-                                  page: HomeScreen(),
-                                  tween: Tween(
-                                    begin: const Offset(1, 0),
-                                    end: Offset.zero,
-                                  ),
-                                ),
-                              );
+                            onTap: () async {
+                              bool result =
+                                  await userModelData.verificationUser(
+                                      userName: userName, userPass: password);
+                              if (result) {
+                                // Navigator.of(context).push(
+                                //   SlidePageRoute(
+                                //     page: HomeScreen(),
+                                //     tween: Tween(
+                                //       begin: const Offset(1, 0),
+                                //       end: Offset.zero,
+                                //     ),
+                                //   ),
+                                // );
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    SlidePageRoute(
+                                      page: HomeScreen(),
+                                      tween: Tween(
+                                        begin: const Offset(1, 0),
+                                        end: Offset.zero,
+                                      ),
+                                    ),
+                                    (route) => false);
+                              } else {
+                                // message : 'Something wents wrong! ',
+                                //                   bgColor: Colors.red,
+                                //                   textColor: Colors.white
+                                toastPopUp(
+                                  bgColor: Colors.red,
+                                  message: '',
+                                  textColor: Colors.white,
+                                );
+                              }
                             },
                             child: Container(
                               alignment: Alignment.center,
