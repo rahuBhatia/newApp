@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-homePageTile(_screenSize, {paid = false}) {
+homePageTile(_screenSize, dataToShow ) {
   Color redToShowBackGroundFaded = Color(0xFFFFD3D3);
   Color redToShowText = Color(0xFFEE5253);
   Color greenToShowBackGroundFaded = Color(0xffD3FFD5);
@@ -8,7 +8,7 @@ homePageTile(_screenSize, {paid = false}) {
   Color colorPaidNotPaidFade = Color(0xFFFFD3D3);
   Color colorPaidNotPaidDark = Color(0xFFEE5253);
   String paidUnPaidText = 'Unpaid';
-  if (paid) {
+  if (dataToShow['status'] == 1) {
     paidUnPaidText = 'Paid';
     colorPaidNotPaidFade = greenToShowBackGroundFaded;
     colorPaidNotPaidDark = greenToShowText;
@@ -70,7 +70,7 @@ homePageTile(_screenSize, {paid = false}) {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "01",
+                          "${dataToShow['b_no']}",
                           style: TextStyle(
                             //fontFamily: AppTheme.fontName,
                             fontSize: 30,
@@ -117,7 +117,7 @@ homePageTile(_screenSize, {paid = false}) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Mia Brown",
+                      "${dataToShow['name']}",
                       style: TextStyle(
                         //fontFamily: AppTheme.fontName,
                         fontSize: 30,

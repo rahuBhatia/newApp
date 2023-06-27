@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constant/constant_data.dart';
 import '../services/api/api_services.dart';
 
 class AuthModel with ChangeNotifier {
   update(AuthModel auth) {}
   String userName = '';
   String userPassword = '';
-
+  var homeData = [];
+  var drawerTaskes = [];
   getUserDetail({required String userName, required String userPass}) {
     print('hi i am in');
     if (userName.isNotEmpty) {
@@ -40,5 +42,35 @@ class AuthModel with ChangeNotifier {
       print('Not ok');
       return false;
     }
+  }
+
+  getHomeScreenData() async {
+    var returnData = [];
+    var result = await ApiService().requestHomeScreenData();
+    print("home result ---$result");
+    if (result != null &&
+        result['success'] == true &&
+        result['data'].length > 0) {
+      returnData = result['data'];
+    } 
+    homeData = returnData;
+    notifyListeners();
+  }
+  getDrawerTaksList() async {
+    var returnData = [];
+    var result = await ApiService().drawerTaskList();
+    print("home result ---$result");
+    if (result != null &&
+        result['success'] == true &&
+        result['data'].length > 0) {
+      returnData = result['data'];
+    } 
+    drawerTaskes = returnData;
+    notifyListeners();
+  }
+
+  logOut() async {
+     await SharedPreferencesData().removeData(SharedPreferencesData().tokenKey);
+     return true;
   }
 }

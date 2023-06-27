@@ -19,4 +19,33 @@ class ApiService {
     }
     return returnData;
   }
+
+  Future<dynamic> requestHomeScreenData() async {
+    dynamic returnData;
+    var url = Uri.parse('https://invoice.auramatics.com/api/floor');
+    dynamic response;
+    try {
+      response = await http.get(url,
+          headers: {"content-type": "application/json"});
+          print(jsonDecode(response.body));
+          returnData = jsonDecode(response.body);
+    } catch (e) {
+      returnData = false;
+    }
+    return returnData;
+  }
+   Future<dynamic> drawerTaskList() async {
+    dynamic returnData;
+    var url = Uri.parse('https://invoice.auramatics.com/api/job-task');
+    dynamic response;
+    try {
+      response = await http.get(url,
+          headers: {"content-type": "application/json"});
+          print(jsonDecode(response.body));
+          returnData = jsonDecode(response.body);
+    } catch (e) {
+      returnData = false;
+    }
+    return returnData;
+  }
 }

@@ -317,9 +317,10 @@ class _LoginPageState extends State<LoginPage> {
                                 // message : 'Something wents wrong! ',
                                 //                   bgColor: Colors.red,
                                 //                   textColor: Colors.white
+                                print('ji i am errpr');
                                 toastPopUp(
                                   bgColor: Colors.red,
-                                  message: '',
+                                  message: 'Something wents wrong!',
                                   textColor: Colors.white,
                                 );
                               }
