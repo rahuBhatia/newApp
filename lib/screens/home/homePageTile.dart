@@ -19,6 +19,7 @@ homePageTile(_screenSize, dataToShow ) {
   }
 
   return Container(
+    margin: EdgeInsets.only(top: 15),
     width: _screenSize.width,
     height: _screenSize.height * .15,
     decoration: BoxDecoration(
@@ -101,7 +102,7 @@ homePageTile(_screenSize, dataToShow ) {
                     fontFamily: 'Gilroy',
                     fontWeight: FontWeight.w600,
                     //letterSpacing: 0.21,
-                    color: Color(0xFF444444),
+                    color: (dataToShow['gender'] == 'male') ? Color(0xff23A993) : Color(0xFFEE5253),
                   ),
                 )
               ],

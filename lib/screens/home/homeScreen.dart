@@ -202,19 +202,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 20),
+                 Container(
+                  margin: EdgeInsets.only(top: 10),
                   width: _screenSize.width,
                   height: _screenSize.height * .66,
-                  child: SingleChildScrollView(
+                  child: (homeScreenData.homeData.length > 0) ? SingleChildScrollView(
                     child: Column(
                       children: [
+                        
                         for(var i =0 ; i < homeScreenData.homeData.length ; i++)
                         // homePageTile(_screenSize , paid: true)
                         homePageTile(_screenSize, homeScreenData.homeData[i]   ),
                       ],
                     ),
-                  ),
+                  ) : Center(
+                        child: CircularProgressIndicator(
+                        ),
+                      ),
                 )
               ],
             ),

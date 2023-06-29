@@ -22,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   late AuthModel _authModel;
   String userName = '';
   String password = '';
+  bool isAction = false;
 
   checkisLogin() async {
     print('hi i am in');
@@ -291,6 +292,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           GestureDetector(
                             onTap: () async {
+                              setState(() {
+                                isAction = true;
+                              });
                               bool result =
                                   await userModelData.verificationUser(
                                       userName: userName, userPass: password);
@@ -314,6 +318,9 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     (route) => false);
                               } else {
+                                setState(() {
+                                  isAction = false;
+                                });
                                 // message : 'Something wents wrong! ',
                                 //                   bgColor: Colors.red,
                                 //                   textColor: Colors.white
@@ -355,17 +362,19 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            // Container(
-            //   width: _screenSize.width,
-            //   height: _screenSize.height,
-            //   color: Colors.grey.withOpacity(0.3),
-            //   child: const Center(
-            //     child: CircularProgressIndicator(
-            //       color: Color(0xFFFBC338),
-            //       strokeWidth: 5,
-            //     ),
-            //   ),
-            // )
+            (isAction)
+                ? Container(
+                    width: _screenSize.width,
+                    height: _screenSize.height,
+                    color: Colors.grey.withOpacity(0.5),
+                    child: const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.deepPurple,
+                        strokeWidth: 5,
+                      ),
+                    ),
+                  )
+                : SizedBox.shrink()
           ],
         ),
       );
