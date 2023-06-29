@@ -70,10 +70,10 @@ homePageTile(_screenSize, dataToShow ) {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "${dataToShow['b_no']}",
+                          "${dataToShow['bed_no']}",
                           style: TextStyle(
                             //fontFamily: AppTheme.fontName,
-                            fontSize: 30,
+                            fontSize: 25,
                             fontFamily: 'Gilroy',
                             fontWeight: FontWeight.w600,
                             //letterSpacing: 0.21,
@@ -94,7 +94,7 @@ homePageTile(_screenSize, dataToShow ) {
                       ]),
                 ),
                 Text(
-                  "Women",
+                  "${dataToShow['gender']}",
                   style: TextStyle(
                     //fontFamily: AppTheme.fontName,
                     fontSize: 18,
@@ -117,10 +117,10 @@ homePageTile(_screenSize, dataToShow ) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${dataToShow['name']}",
+                      "${dataToShow['cfullname']}",
                       style: TextStyle(
                         //fontFamily: AppTheme.fontName,
-                        fontSize: 30,
+                        fontSize: 25,
                         fontFamily: 'Gilroy',
                         fontWeight: FontWeight.w600,
                         //letterSpacing: 0.21,
@@ -128,7 +128,19 @@ homePageTile(_screenSize, dataToShow ) {
                       ),
                     ),
                     Text(
-                      "Service: Type 1  Age: 38  Floor: 1",
+                      "Service: ${dataToShow['serve_type']}",
+                      style: TextStyle(
+                        //fontFamily: AppTheme.fontName,
+                        fontSize: 15,
+                        fontFamily: 'Gilroy',
+                        fontWeight: FontWeight.w400,
+                        //letterSpacing: 0.21,
+                        color: Color(0xFF444444),
+                      ),
+                    ),
+                    SizedBox(height: _screenSize.height * .005,),
+                    Text(
+                      "Age: ${dataToShow['age']}  Floor: ${dataToShow['bed_floor']}",
                       style: TextStyle(
                         //fontFamily: AppTheme.fontName,
                         fontSize: 15,
@@ -146,7 +158,7 @@ homePageTile(_screenSize, dataToShow ) {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(2),
+                        //padding: EdgeInsets.all(2),
                         alignment: Alignment.center,
                         //width: _screenSize.width * .15,
                         height: _screenSize.height * .03,
@@ -154,21 +166,21 @@ homePageTile(_screenSize, dataToShow ) {
                           color: colorPaidNotPaidFade,
                           borderRadius: BorderRadius.circular(2),
                         ),
-                        child: Text(
-                          paidUnPaidText,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            //fontFamily: AppTheme.fontName,
-                            fontSize: 15,
-                            fontFamily: 'Gilroy',
-                            fontWeight: FontWeight.w600,
-                            //letterSpacing: 0.21,
-                            color: colorPaidNotPaidDark,
-                          ),
-                        ),
+                        // child: Text(
+                        //   paidUnPaidText,
+                        //   textAlign: TextAlign.center,
+                        //   style: TextStyle(
+                        //     //fontFamily: AppTheme.fontName,
+                        //     fontSize: 15,
+                        //     fontFamily: 'Gilroy',
+                        //     fontWeight: FontWeight.w600,
+                        //     //letterSpacing: 0.21,
+                        //     color: colorPaidNotPaidDark,
+                        //   ),
+                        // ),
                       ),
                       Text(
-                        "HK \$4",
+                        "${dataToShow['nationality']} \$4",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           //fontFamily: AppTheme.fontName,

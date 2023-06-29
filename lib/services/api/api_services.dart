@@ -22,7 +22,7 @@ class ApiService {
 
   Future<dynamic> requestHomeScreenData() async {
     dynamic returnData;
-    var url = Uri.parse('https://invoice.auramatics.com/api/floor');
+    var url = Uri.parse('https://invoice.auramatics.com/api/customer');
     dynamic response;
     try {
       response = await http.get(url,
