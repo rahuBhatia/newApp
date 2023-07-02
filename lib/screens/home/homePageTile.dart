@@ -37,7 +37,8 @@ homePageTile(_screenSize, dataToShow ) {
         width: _screenSize.width * .03,
         height: _screenSize.height * .13,
         decoration:  BoxDecoration(
-          color: colorPaidNotPaidDark,
+          //color: colorPaidNotPaidDark,
+          color: Colors.white,
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(20),
             bottomRight: Radius.circular(20),

@@ -295,48 +295,66 @@ class _LoginPageState extends State<LoginPage> {
                               setState(() {
                                 isAction = true;
                               });
-                              bool result =
-                                  await userModelData.verificationUser(
-                                      userName: userName, userPass: password);
-                              if (result) {
-                                // Navigator.of(context).push(
-                                //   SlidePageRoute(
-                                //     page: HomeScreen(),
-                                //     tween: Tween(
-                                //       begin: const Offset(1, 0),
-                                //       end: Offset.zero,
-                                //     ),
-                                //   ),
-                                // );
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    SlidePageRoute(
-                                      page: HomeScreen(),
-                                      tween: Tween(
-                                        begin: const Offset(1, 0),
-                                        end: Offset.zero,
+
+                              if (userName.isNotEmpty && password.isNotEmpty) {
+                                var result =
+                                    await userModelData.verificationUser(
+                                        userName: userName, userPass: password);
+                                if (result['success'] == true) {
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      SlidePageRoute(
+                                        page: HomeScreen(),
+                                        tween: Tween(
+                                          begin: const Offset(1, 0),
+                                          end: Offset.zero,
+                                        ),
                                       ),
-                                    ),
-                                    (route) => false);
+                                      (route) => false);
+                                } else if (result['success'] == false) {
+                                  setState(() {
+                                    isAction = false;
+                                  });
+                                  // message : 'Something wents wrong! ',
+                                  //                   bgColor: Colors.red,
+                                  //                   textColor: Colors.white
+                                  print('ji i am errpr');
+                                  toastPopUp(
+                                    bgColor: Colors.red,
+                                    message: result['data'][0],
+                                    textColor: Colors.white,
+                                  );
+                                } else {
+                                  setState(() {
+                                    isAction = false;
+                                  });
+                                  toastPopUp(
+                                    bgColor: Colors.red,
+                                    message: 'Server error!',
+                                    textColor: Colors.white,
+                                  );
+                                }
                               } else {
                                 setState(() {
                                   isAction = false;
                                 });
-                                // message : 'Something wents wrong! ',
-                                //                   bgColor: Colors.red,
-                                //                   textColor: Colors.white
-                                print('ji i am errpr');
+                                String showMessage = 'Please fill username and password';
+                                if (userName.isEmpty ) {
+                                  showMessage = 'Please fill username';
+                                } else if (password.isEmpty){
+                                  showMessage = 'Please fill password';
+                                }
                                 toastPopUp(
                                   bgColor: Colors.red,
-                                  message: 'Something wents wrong!',
+                                  message: showMessage,
                                   textColor: Colors.white,
                                 );
                               }
                             },
                             child: Container(
                               alignment: Alignment.center,
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(11),
                               width: _screenSize.width,
-                              height: _screenSize.height * .06,
+                              height: _screenSize.height * .07,
                               decoration: BoxDecoration(
                                 color: Color(0xFF856AEF),
                                 borderRadius: BorderRadius.circular(30),
