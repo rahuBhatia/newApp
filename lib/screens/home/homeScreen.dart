@@ -90,17 +90,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(12),
                 width: _screenSize.width,
-                height: 60,
+                height: _screenSize.height *.09,
                 decoration: BoxDecoration(
                     color: Color(0x81C9A1D4),
                     borderRadius: BorderRadius.circular(30)),
                 child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
+                     // color: Colors.green,
                       width: 30,
                       height: 30,
                       decoration: const BoxDecoration(
-                        //color: Colors.red,
                         //border: Border.all(),
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
@@ -116,8 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20),
-                      width: _screenSize.width * .71,
+                     // color: Colors.red,
+                      margin: EdgeInsets.only(left: _screenSize.width * .04,),
+                      width: _screenSize.width * .68,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -200,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(12),
                 width: _screenSize.width,
-                height: 60,
+                height:_screenSize.height *.09,
                 decoration: BoxDecoration(
                   color: Color(0xFFF2F2F2),
                   borderRadius: BorderRadius.circular(30),
@@ -266,9 +268,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: EdgeInsets.only(top: _screenSize.height *.02),
                 width: _screenSize.width,
-                height: _screenSize.height * .66,
+                height: _screenSize.height * .60,
                 child: (homeScreenData.homeData.length > 0)
                     ? SingleChildScrollView(
                         child: Column(
